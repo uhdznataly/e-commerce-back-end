@@ -47,22 +47,23 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   // update a tag's name by its `id` value
-  try{
-    tagData = await Tag.update(
-      
-      {tag_name: req.body.tag_name},
-      {where: {
+  Tag.update(
+    {
+      tag_name: req.body.tag_name,
+    },
+    {
+      where: {
         id: req.params.id,
-      },}
-      
-      );
-      if(!tagData[0]){
-    res.status(404).json({message: 'This tag does not exist!'});
-    return;
-  }  res.status(200).json('Category updated!');
-} catch (err) {
-  res.status(500).json(err)
-}
+      },
+    }
+  )
+    .then((updatedTag) => {
+      res.json(updatedTag);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json(err);
+    });
 });
 
 router.delete('/:id', async (req, res) => {
