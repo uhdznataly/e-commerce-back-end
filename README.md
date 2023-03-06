@@ -26,7 +26,7 @@ The challenge is to build the back end for an e-commerce site by taking a workin
 
 ## Installation
 
-
+npm i and seeding your database
 
 ## Usage
 
